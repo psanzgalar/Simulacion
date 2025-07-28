@@ -21,12 +21,12 @@ def sistema(t, y, r, a, b, d):
 def main():
     st.title("Modelo simple de tumor e inmunidad")
 
-    r = st.slider('r', 0.1, 2.0, 1.0)
-    a = st.slider('a', 0.1, 2.0, 1.0)
-    b = st.slider('b', 0.01, 1.0, 0.1)
-    d = st.slider('d', 0.01, 1.0, 0.1)
-    T0 = st.slider('T0', 0.1, 5.0, 1.0)
-    I0 = st.slider('I0', 0.1, 5.0, 1.0)
+    r = st.slider('Proliferación tumoral', 0.1, 2.0, 1.0)
+    a = st.slider('Muerte tumoral', 0.1, 2.0, 1.0)
+    b = st.slider('Proliferación células inmunes', 0.01, 1.0, 0.1)
+    d = st.slider('Muerte células inmunes', 0.01, 1.0, 0.1)
+    T0 = st.slider('Número de células iniciales (tumor)', 0.1, 5.0, 1.0)
+    I0 = st.slider('Número de células iniciales (sistema inmune)', 0.1, 5.0, 1.0)
     tiempo = st.slider('Tiempo', 20, 300, 100)
 
     sol = solve_ivp(sistema, [0, tiempo], [T0, I0], args=(r, a, b, d), t_eval=np.linspace(0, tiempo, 1000))
@@ -35,7 +35,7 @@ def main():
 
     fig, ax = plt.subplots()
     ax.plot(t, T, label='Tumor (T)', color='red')
-    ax.plot(t, I, label='Inmunidad (I)', color='blue')
+    ax.plot(t, I, label='Sistema inmune (I)', color='blue')
     ax.set_title('Evolución temporal')
     ax.set_xlabel('Tiempo')
     ax.set_ylabel('Poblaciones')
